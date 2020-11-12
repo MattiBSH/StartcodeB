@@ -48,6 +48,7 @@ public class MyOwnResource {
     //gets all species
     @GET
     @Path("all")
+    @RolesAllowed("user")
     @Produces(MediaType.APPLICATION_JSON)
     public String allSpecies() { 
         List<SpeciesDTO> allSpecies = FACADE.getAllSpecies();

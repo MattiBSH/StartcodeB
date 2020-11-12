@@ -20,30 +20,30 @@ public class SetupTestUsers {
     // Also, either delete this file, when users are created or rename and add to .gitignore
     // Whatever you do DO NOT COMMIT and PUSH with the real passwords
 //edited to not show pw
-//    User user = new User("user", "m");
-//    User admin = new User("admin", "m");
-//    User both = new User("user_admin", "m");
-//
-//    if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
-//      throw new UnsupportedOperationException("You have not changed the passwords");
-//
-//    em.getTransaction().begin();
-//    Role userRole = new Role("user");
-//    Role adminRole = new Role("admin");
-//    user.addRole(userRole);
-//    admin.addRole(adminRole);
-//    both.addRole(userRole);
-//    both.addRole(adminRole);
-//    em.persist(userRole);
-//    em.persist(adminRole);
-//    em.persist(user);
-//    em.persist(admin);
-//    em.persist(both);
-//    em.getTransaction().commit();
-//    System.out.println("PW: " + user.getUserPass());
-//    System.out.println("Testing user with OK password: " + user.verifyPassword("test"));
-//    System.out.println("Testing user with wrong password: " + user.verifyPassword("test1"));
-//    System.out.println("Created TEST Users");
+    User user = new User("user", "12232131231233");
+    User admin = new User("admin", "123123123123313123");
+    User both = new User("user_admin", "122312331231231233");
+
+    if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
+      throw new UnsupportedOperationException("You have not changed the passwords");
+
+    em.getTransaction().begin();
+    Role userRole = new Role("user");
+    Role adminRole = new Role("admin");
+    user.addRole(userRole);
+    admin.addRole(adminRole);
+    both.addRole(userRole);
+    both.addRole(adminRole);
+    em.persist(userRole);
+    em.persist(adminRole);
+    em.persist(user);
+    em.persist(admin);
+    em.persist(both);
+    em.getTransaction().commit();
+    System.out.println("PW: " + user.getUserPass());
+    System.out.println("Testing user with OK password: " + user.verifyPassword("test"));
+    System.out.println("Testing user with wrong password: " + user.verifyPassword("test1"));
+    System.out.println("Created TEST Users");
    
   }
 
