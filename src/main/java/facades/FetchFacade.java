@@ -1,5 +1,6 @@
 package facades;
 
+import DTOs.SpeciesDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -10,7 +11,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utils.HttpUtils;
 
 public class FetchFacade {
@@ -49,5 +49,17 @@ public class FetchFacade {
        
         return retList;
     }
-
+    
+    public static SpeciesDTO fetchSpecies() throws IOException{
+        String person=HttpUtils.fetchData("https://swapi.dev/api/species/schema");
+        Gson g=new Gson();
+        System.out.println(person);
+        
+        SpeciesDTO SpeciesDTO=g.fromJson(person, SpeciesDTO.class);
+        return SpeciesDTO;
+    }
+    public static void main(String[] args) throws IOException {
+        FetchFacade f = new FetchFacade();
+        System.out.println(f.fetchSpecies().toString());
+    }
 }
