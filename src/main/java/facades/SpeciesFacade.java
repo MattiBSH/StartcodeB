@@ -22,7 +22,7 @@ import utils.EMF_Creator;
  * @author matti
  */
 public class SpeciesFacade {
-    private static EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+    private static EntityManagerFactory emf;
     private static SpeciesFacade instance;
 
     public SpeciesFacade() {
