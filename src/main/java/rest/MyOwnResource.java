@@ -76,4 +76,6 @@ public class MyOwnResource {
         SpeciesDTO s=FACADE.getSpeciesById(id);
         return GSON.toJson(s);
     }
+    
+    
 }
