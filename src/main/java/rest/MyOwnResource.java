@@ -8,9 +8,11 @@ package rest;
 import DTOs.SpeciesDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import facades.FetchFacade;
 import facades.SpeciesFacade;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.Context;
@@ -38,6 +40,7 @@ public class MyOwnResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
 
     private static final SpeciesFacade FACADE = SpeciesFacade.getUserFacade(EMF);
+    private final FetchFacade facade1 = new FetchFacade();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     /**
      * Creates a new instance of GenericResource
@@ -77,5 +80,12 @@ public class MyOwnResource {
         return GSON.toJson(s);
     }
     
-    
+    @GET
+    @Path("/schema")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String allSchema() throws IOException, InterruptedException, ExecutionException {
+         List<String> list = facade1.fetchParallel2();
+        return GSON.toJson(list);
+        
+    }
 }

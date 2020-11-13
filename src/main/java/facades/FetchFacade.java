@@ -58,8 +58,27 @@ public class FetchFacade {
         SpeciesDTO SpeciesDTO=g.fromJson(person, SpeciesDTO.class);
         return SpeciesDTO;
     }
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
         FetchFacade f = new FetchFacade();
-        System.out.println(f.fetchSpecies().toString());
+        System.out.println(f.fetchParallel2());
+    }
+    
+     public List<String> fetchParallel2() throws InterruptedException, ExecutionException {
+        String[] hostList = {"https://swapi.dev/api/planets/schema", "https://swapi.dev/api/vehicles/schema", "https://swapi.dev/api/species/schema"};
+        ExecutorService executor = Executors.newCachedThreadPool();
+        List<Future<String>> futures = new ArrayList<>();
+        List<String> retList = new ArrayList();
+
+        for (String url : hostList) {
+            Callable<String> urlTask = new Default(url);
+            Future future = executor.submit(urlTask);
+            futures.add(future);
+        }
+
+        for (Future<String> fut : futures) {
+            retList.add(fut.get());
+        }
+       
+        return retList;
     }
 }
